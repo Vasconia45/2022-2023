@@ -3,11 +3,8 @@
     <body>
         <?php
             include("movie.php");
-            $p2 = new Movies($_POST["name"], $_POST["isan"], $_POST["year"], $_POST["points"]);
-            $p1->addMovie($_POST["isan"], $p2);
-
-            $p1->showMovies();
-            echo count($p1->getMovies());
+            $p2 = new Movie($_POST["name"], $_POST["isan"], $_POST["year"], $_POST["points"]);
+            echo $oculto;
 
 
 

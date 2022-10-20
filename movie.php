@@ -1,10 +1,9 @@
 <?php
-    class Movies{
+    class Movie{
         private $name;
         private $isan;
         private $year;
         private $points;
-        private $movies = [];
 
         public function __construct($name, $isan, $year, $points){
             $this->name = $name;
@@ -29,23 +28,38 @@
             return $this->points;
         }
 
-        public function getMovies(){
-            return $this->movies;
+        public function __toString(){
+            return  $this->name . "-" . $this->isan . "-" . $this->year . "-" . $this->points;   
+        }
+    }
+
+    class Movies {
+
+        private $movies = [];
+
+        public function addMovie($p1){
+            $this->movies[] = $p1;
         }
 
-        public function toString(){
-            return "'" . $this->name . "' from " . $this->year;
+        public function compareMovie($movie){
+            echo $movie . "<br>";
+            $str = "";
+            for($i = 0; $i < count($this->movies); $i++){
+                $str .= $this->movies[$i];
+            }
+            echo $str;
         }
 
-        public function addMovie($code, $p1){
-            $this->movies[$code] = $p1;
+        public function returnMovie(){
+
         }
 
         public function showMovies(){
-            foreach($this->movies as $key => $value){
-                echo $value->getName();
+            $str = "";
+            for($i = 0; $i < count($this->movies); $i++){
+                $str .= $this->movies[$i];
             }
+            return $str;
         }
     }
-    $p1 = new Movies("General", "general", 2022, 5);
 ?>

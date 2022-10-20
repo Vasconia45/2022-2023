@@ -4,8 +4,17 @@
         <title>TOP Movies</title>
     </head>
     <body>
+        <?php
+            include("movie.php"); 
+            $movies = new Movies();
+            if (isset($_POST["send"])){
+                $p1 = new Movie($_POST["name"], $_POST["isan"], $_POST["year"], $_POST["points"]);
+                $movies->addMovie($p1);
+            }
+         ?>
         <div>
-            <form action="main2.php" method="POST">
+            <p><?php echo $movies->showMovies(); ?></p>
+            <form action="index.php" method="POST">
                 <span>Name:</span><input type="text" name="name"><br>
                 <span>ISAN:</span><input type="text" name="isan"><br>
                 <span>Year:</span><input type="text" name="year"><br>
@@ -20,9 +29,13 @@
                     <option value="5">5</option>
                 </select>
                 <br>
-                <input type="hidden" name="oculto[]" value="alta">
+                <input type="hidden" name="oculto" value="<?php echo $movies->compareMovie();?>">
                 <input type="submit" name="send" value="Send">
             </form>
+
+        
         </div>
+
+
     </body>
 </html>
