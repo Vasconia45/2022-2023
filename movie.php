@@ -37,23 +37,48 @@
 
         private $movies = [];
 
+        public function getMovies(){
+            return count($this->movies);
+        }
+
         public function addMovie($p1){
-            $this->movies[] = $p1;
+            if(($p1->getName() == "") && ($p1->getIsan() == "")){
+                echo "The name and isan fields are empty.";
+            }
+            else{
+                foreach($this->movies as $key => $value){
+                    if($key == $p1->getIsan()){
+                        if($p1->getName() == ""){
+                            unset($this->movies[$p1->getIsan()]);
+                        }
+                        else{
+                            if(($p1->getName() != "") && ($p1->getIsan() == "")){
+                                if(str_contains($value->getName(), $p1->getName())){
+                                    echo "ok";
+                                    unset($this->movies[null]);
+                                }
+                            }
+                            else{
+                                $this->movies[$p1->getIsan()] = $p1;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         public function compareMovie($movie){
-            echo $movie . "<br>";
-            $str = "";
-            for($i = 0; $i < count($this->movies); $i++){
-                $str .= $this->movies[$i];
-            }
-            echo $str;
+            
         }
 
         public function returnMovie(){
-
+            $total = "";
+            $str = "hello /";
+            $total = $total . $str;
+            return $total;
         }
 
+        //Simple metodo para comprobar si se guardan los valores en el array movies.
         public function showMovies(){
             $str = "";
             for($i = 0; $i < count($this->movies); $i++){

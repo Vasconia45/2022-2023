@@ -1,31 +1,57 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <title>TOP Movies</title>
+    </head>
     <body>
-        <?php
-            include("movie.php");
-            $p2 = new Movie($_POST["name"], $_POST["isan"], $_POST["year"], $_POST["points"]);
-            echo $oculto;
+    <h1>Welcome <?php echo $_POST["username"]; ?></h1>
+    <?php
+            include("movie.php"); 
+            $movies = new Movies();
 
+            /*if (isset($_POST["send"])){
+                $p1 = new Movie($_POST["name"], $_POST["isan"], $_POST["year"], $_POST["points"]);
+                echo $movies->getMovies();
+                echo $movies->compareMovie($p1);
+                echo $movies->getMovies();
+                $oculto = $oculto . $movies->returnMovie();
+                if($movies->compareMovie($p1) == false){
+                    $movies->addMovie($p1);
+                    echo "inserted.";
+                }
+                else{
+                    echo "theyre equal.";
+                }
+            }*/
+         ?>
+        <div>
+            <?php
+                if(isset($_POST["name"]) && isset($_POST["isan"]) && isset($_POST["year"]) && $_POST["points"]){
+                    $movie = new Movie($_POST["name"], $_POST["isan"], $_POST["year"], $_POST["points"]);
+                    $movies->addMovie($movie);
+                    echo $movies->showMovies();
+                }
+            ?>
+            <form action="main.php" method="POST">
+                <span>Name:</span><input type="text" name="name"><br>
+                <span>ISAN:</span><input type="text" name="isan"><br>
+                <span>Year:</span><input type="text" name="year"><br>
 
+                <label for="points">Points:</label>
+                <select name="points" id="points">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <br>
+                <input type="submit" name="send" value="Send">
+                <input type="hidden" name="oculto" value='<?php echo $movies->showMovies();?>'>
+            </form>
 
-        /*echo $_POST["name"] . " - " . $_POST["isan"] . " - " . $_POST["year"] . " - " .  $_POST["points"];
         
-
-            if(empty($movies)){
-                echo "empty";
-                $p1 = new Movies($_POST["name"], $_POST["isan"], $_POST["year"], $_POST["points"]);
-                $movies[$_POST["isan"]] = $p1;
-            }
-            else{
-                echo "ibd";
-                $p1 = new Movies($_POST["name"], $_POST["isan"], $_POST["year"], $_POST["points"]);
-                $movies[$_POST["isan"]] = $p1;
-            }
-
-            echo count($movies);
-          */  
-        ?>
-        <br>
-        <a href="index.php"> Return back</a>
+        </div>
     </body>
 </html>
